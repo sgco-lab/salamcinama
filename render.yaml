@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: now-playing-scraper
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scraper.py
+    staticPublishPath: public
+
+cronJobs:
+  - name: daily-scrape
+    type: cron
+    schedule: "0 0 * * *"
+    command: python scraper.py
