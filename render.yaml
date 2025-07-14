@@ -1,14 +1,11 @@
 services:
   - type: web
-    name: salamcinama
+    name: salamcinema
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python scraper.py
     staticPublishPath: public
-
-cronJobs:
-  - name: daily-scrape
-    type: cron
-    schedule: "0 0 * * *"
-    command: python scraper.py
+    preDeployCommand: |
+      apt-get update
+      apt-get install -y google-chrome-stable
